@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>双色球</title>
+    <script src="./jquery-1.12.4.min.js"></script>
+    <script src="./lodash.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            width: 1200px;
+            height: 300px;
+            margin: 0 auto;
+            display: flex;
+        }
+
+        header>article:nth-of-type(1) {
+            width: 700px;
+        }
+
+        header>article:nth-of-type(2) {
+            width: 500px;
+        }
+
+        header>article>div {
+            height: 200px;
+            border: 1px solid;
+        }
+
+        header h1 {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        header h1:nth-of-type(1) {
+            color: #f00;
+        }
+
+        header h1:nth-of-type(2) {
+            color: #00f;
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        ul>li {
+            margin: 10px 0 0 10px;
+            width: 50px;
+            height: 50px;
+            border: 1px solid gainsboro;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 50px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn {
+            display: block;
+            width: 140px;
+            height: 50px;
+            font-style: 20px;
+            margin: 20px auto 0;
+            border: 1px solid gainsboro;
+            background: #fff;
+            border-radius: 10px;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .btn:hover {
+            color: #f00;
+        }
+
+        .foot {
+            width: 700px;
+            margin: 20px auto 0;
+        }
+
+        .foott {
+            margin-bottom: 40px;
+        }
+
+        .foott1,
+        .foott2 {
+            height: 60px;
+            display: flex;
+            margin: 30px 0;
+            align-items: center;
+        }
+
+        .foott1_1,
+        .foott2_1 {
+            margin-right: 100px;
+        }
+
+        .foott1_2>li,
+        .foott2_2>li {
+            border: 1px solid #f00;
+            color: #f00;
+        }
+
+        .foott1_3,
+        .foott2_3 {
+            margin: 10px 0 0 10px;
+            width: 50px;
+            height: 50px;
+            /* border: 1px solid #00f; */
+            border-radius: 50%;
+            text-align: center;
+            line-height: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #00f;
+        }
+
+        .footb {
+            font-size: 30px;
+            font-weight: 500;
+        }
+
+        .red_s {
+            background: #f00;
+            color: #fff;
+        }
+
+        .blue_s {
+            background: #00f;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <article>
+            <h1 style=" color: #f00">红球区</h1>
+            <div style="border:1px solid #f00">
+                <ul class="reds">
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                    <li>6</li>
+                    <li>7</li>
+                    <li>8</li>
+                    <li>9</li>
+                    <li>10</li>
+                    <li>11</li>
+                    <li>12</li>
+                    <li>13</li>
+                    <li>14</li>
+                    <li>15</li>
+                    <li>16</li>
+                    <li>17</li>
+                    <li>18</li>
+                    <li>19</li>
+                    <li>20</li>
+                    <li>21</li>
+                    <li>22</li>
+                    <li>23</li>
+                    <li>24</li>
+                    <li>25</li>
+                    <li>26</li>
+                    <li>27</li>
+                    <li>28</li>
+                    <li>29</li>
+                    <li>30</li>
+                    <li>31</li>
+                    <li>32</li>
+                    <li>33</li>
+                </ul>
+            </div>
+        </article>
+        <article>
+            <h1 style=" color: #00f">蓝球区</h1>
+            <div style="border:1px solid #00f">
+                <ul class="blues">
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                    <li>6</li>
+                    <li>7</li>
+                    <li>8</li>
+                    <li>9</li>
+                    <li>10</li>
+                    <li>11</li>
+                    <li>12</li>
+                    <li>13</li>
+                    <li>14</li>
+                    <li>15</li>
+                    <li>16</li>
+                </ul>
+            </div>
+        </article>
+    </header>
+    <button id="btn" class="btn">确认号码</button>
+    <section class="foot">
+        <div class="foott">
+            <div class="foott1">
+                <span class="foott1_1">用户选择号码</span>
+                <ul class="foott1_2">
+
+                </ul>
+                <span class="foott1_3"></span>
+            </div>
+            <div class="foott2">
+                <span class="foott2_1">本次中奖号码</span>
+                <ul class="foott2_2">
+                </ul>
+                <span class="foott2_3"></span>
+            </div>
+        </div>
+        <div class="footb">
+            中奖情况：
+            <span class="footbb"></span>
+        </div>
+    </section>
+    <script>
+        let num1 = [];//存红球
+        let num2 = [];//存蓝球
+
+        //左边红区点击事件获取值
+        $('.reds').on("click", 'li', function (e) {
+            $(".foott1_2").html("");//先清空用户选择号码ul
+            //如果有点击后样式被再次点击清除自身数组对应值
+            //如果没有添加样式并向数组添加对应的值
+            //如果超过7个删除最后一个并取消样式
+            if (e.target.className == "") {
+                e.target.className = 'red_s';
+                num1.push(~~e.target.innerHTML);
+                //遍历显示到用户选择号码ul
+                let arr = [];
+                for (let i = 0; i < num1.length; i++) {
+                    arr += `<li>${num1[i]}</li>`;
+                }
+                $(".foott1_2").html(arr);
+
+                if (num1.length == 7) {
+                    e.target.className = '';
+                    let leth = num1.length - 1;
+                    num1.splice(leth, 1);
+                    //遍历显示到用户选择号码ul
+                    let arr1 = [];
+                    for (let j = 0; j < num1.length; j++) {
+                        arr1 += `<li>${num1[j]}</li>`;
+                    }
+                    $(".foott1_2").html(arr1);
+
+                    alert('已经有6个不能超过6个');
+                }
+            }
+            else {
+                e.target.className = '';
+                for (let i = 0; i < num1.length; i++) {
+                    if (e.target.innerHTML == num1[i]) {
+                        num1.splice(i, 1);
+                    }
+                }
+                let arr2 = [];
+                for (let k = 0; k < num1.length; k++) {
+                    arr2 += `<li>${num1[k]}</li>`;
+                }
+                $(".foott1_2").html(arr2);
+            }
+
+        });
+
+        //右边蓝区点击事件获取值
+        $('.blues').on("click", 'li', function (e) {
+            $(".foott1_3").html("");//先清空用户选择号码sapn
+            $(".foott1_3").css("");//先清空用户选择号码sapn样式
+            //如果有点击后样式被再次点击清除自身数组对应值
+            //如果没有添加样式并向数组添加对应的值
+            //如果超过1个删除最后一个并取消样式
+            if (e.target.className == "") {
+                e.target.className = 'blue_s';
+                num2.push(~~e.target.innerHTML);
+                //显示到用户选择号码span
+                $(".foott1_3").html(num2[0]);
+                $(".foott1_3").css('border', '1px solid #00f');
+                if (num2.length == 2) {
+                    e.target.className = '';
+                    let leth = num2.length - 1;
+                    num2.splice(leth, 1);
+                    $(".foott1_3").html(num2[0]);
+                    $(".foott1_3").css('border', '1px solid #00f');
+                    alert('已经有1个不能超过1个');
+                }
+            }
+            else {
+                e.target.className = '';
+                for (let i = 0; i < num2.length; i++) {
+                    if (e.target.innerHTML == num2[i]) {
+                        num2.splice(i, 1);
+                    }
+                }
+                $(".foott1_3").html(num2[0]);
+                $(".foott1_3").css('border', '1px');
+            }
+        });
+
+        //确认点击事件
+        $('#btn').on('click', function () {
+            if (num1.length == 6 && num2.length == 1) {
+                $('.footbb').html('未中奖');//抽奖情况默认为未中奖
+                //取消获取红蓝球
+                $('.reds').off("click");
+                $('.blues').off("click");
+                //随机
+                let random1 = [];//随机红球
+                while (true) {
+                    random1.push(_.random(1, 33));//将随机数添加到random1中
+                    random1 = _.uniq(random1)//去重
+                    if (random1.length == 6) {
+                        break;
+                    }
+                }
+
+                let random2 = [];//随机蓝球
+                random2.push(_.random(1, 16));
+
+                //渲染
+                $(function () {
+                    let arr = [];
+                    for (let i = 0; i < random1.length; i++) {
+                        arr += `<li>${random1[i]}</li>`
+                    }
+                    $(".foott2_2").html(arr);
+                    $('.foott2_3').html(random2);
+                    $(".foott2_3").css('border', '1px solid #00f');
+                });
+
+                //判断
+                //红球判断
+                let restu = _.intersection(num1, random1);
+
+                //蓝球判断
+                let restu1 = _.intersection(num2, random2);
+
+                //判断奖项
+                if (restu.length == 6 && restu1.length == 0) {
+                    $('.footbb').html("恭喜你获得二等奖");
+                } else if (restu.length == 4 || (restu.length == 3 && restu1.length == 1)) {
+                    $('.footbb').html('恭喜你获得五等奖：10元');
+                } else if (restu.length == 1 && restu1.length == 1) {
+                    $('.footbb').html('恭喜你获得六等奖：5元');
+                } else if (restu.length == 0) {
+                    $('.footbb').html('未中奖');
+                } else if (restu.length == 6 && restu1.length == 1) {
+                    $('.footbb').html("恭喜你获得一等奖500万");
+                } else if (restu.length == 5 && restu1.length == 1) {
+                    $('.footbb').html("恭喜你获得三等奖3000元");
+                }
+            }
+            else {
+                alert('抽奖球号未选择完！！！');
+            }
+
+        });
+    </script>
+</body>
+
+</html>
